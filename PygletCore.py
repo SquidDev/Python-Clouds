@@ -20,8 +20,8 @@ class CloudRenderer(CloudChunk):
 			('c4f/static', self.Colours)
 		)
 
-	def Draw(self):
-		super(CloudRenderer, self).Draw()
+	def Draw(self, X):
+		super(CloudRenderer, self).Draw(X)
 		self.Batch.draw()
 
 class CloudRenderManager(CloudManager):
@@ -60,7 +60,7 @@ class GameWindow(pyglet.window.Window):
 		glTranslatef(-self.XPos, 0, 0)
 		X = int(self.XPos / Cfg.CloudWidth)
 		for CloudX in xrange(X, X + int(round(self.XPos / Cfg.CloudWidth)) + 3):
-			self.Clouds.GetObject(CloudX * Cfg.CloudWidth).Draw()
+			self.Clouds.GetObject(CloudX * Cfg.CloudWidth).Draw(self.XPos)
 
 
 

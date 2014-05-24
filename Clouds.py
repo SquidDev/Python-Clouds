@@ -47,6 +47,8 @@ class CloudChunk(object):
 		Colours = []
 		Length = 0
 
+		PCMap = {}
+
 		#Generation stuff
 		PixelSize = Config.PixelSize
 
@@ -76,12 +78,16 @@ class CloudChunk(object):
 				
 				Colours.append(NoiseGen)
 
+				if NoiseGen > 0:
+					PCMap[(XOff, Y)] = (1, 1, 1, NoiseGen)
+
 				Length += 1
 
 		#Assign variables
 		self.Points = Points
 		self.Colours = Colours
 		self.Length = Length
+		self.PCMap = PCMap
 
 		print "Finished Generation at", self.X
 		print "\tTook",time() - start
@@ -91,7 +97,7 @@ class CloudChunk(object):
 		pass
 		
 
-	def Draw(self):
+	def Draw(self, X):
 		if self.Finished:
 			self.Finished = False
 			self.GenerateFinshed()
